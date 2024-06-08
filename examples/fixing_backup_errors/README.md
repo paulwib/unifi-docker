@@ -4,14 +4,14 @@ This text is about problems relating to backups and downloading of backup files.
 
 ## Background
 
-Doing backups of your Unifi configuration is important.  
+Doing backups of your Unifi configuration is important.
 Without backups you run the risk of having to re-configure everything if your controller for some reason dies. This can be a massive task for large networks.
 
-This text is an attempt at providing some more context and concrete commands to solve the problems discussed in [this issue](https://github.com/nexusforge/unifi-docker/issues/512).
+This text is an attempt at providing some more context and concrete commands to solve the problems discussed in [this issue](https://github.com/paulwib/unifi-docker/issues/512).
 
 ## Problem
 
-After doing a fresh install of the Unifi controller using this Docker image you *may* run into errors when trying to do backups.  
+After doing a fresh install of the Unifi controller using this Docker image you *may* run into errors when trying to do backups.
 Depending on your local setup things may work fine out of the box, but in other cases you can run into this backup problem.
 
 Clicking the "Download Backup" link simply does... nothing.
@@ -49,8 +49,8 @@ services:
       - db:/data/db
       - dbcfg:/data/configdb
   controller:
-    # image: "nexusforge/unifi-docker:${TAG:-latest}"
-    image: nexusforge/unifi-docker:latest
+    # image: "paulwib/unifi-docker:${TAG:-latest}"
+    image: paulwib/unifi-docker:latest
     # container_name: ${COMPOSE_PROJECT_NAME}_controller
     container_name: unifi_controller
     depends_on:
@@ -112,7 +112,7 @@ networks:
 
 ## Investigation
 
-The Docker container will use user `unifi` to run the controller.  
+The Docker container will use user `unifi` to run the controller.
 Looking at the /etc/passwed file in the running container we get:
 
 ```bash
@@ -154,10 +154,10 @@ drwxr-xr-x 4 unifi unifi 4096 Jan 20 13:42 ..
 unifi@64602e3bbf81:/unifi$
 ```
 
-See how the current directory (`.`) has an owner of `root:root`, whereas the directory above it has `unifi:unfi` as owner?  
+See how the current directory (`.`) has an owner of `root:root`, whereas the directory above it has `unifi:unfi` as owner?
 That's a clue that there is a permissions problem.
 
-Going back to the docker-compose file, we can see that `/unifi/data/backup` in the container is mapped to `./backup` on the host computer.  
+Going back to the docker-compose file, we can see that `/unifi/data/backup` in the container is mapped to `./backup` on the host computer.
 
 Next step is to check the permissions on the host computer for that `./backup` directory. It must be readable/writable by the container's `unifi:unifi` acount - otherwise the code running in the container won't be able to access anything in `/unifi/data/backup` and below.
 
@@ -171,14 +171,14 @@ drwxr-xr-x  2 root root 4096 Jan 20 13:14 backup
 root@abc1:/opt/docker/container/unifi-controller#
 ```
 
-Ah! The second last line (for the backup subdirectory) has an owner of `root:root` (that's the host's root user, btw).  
+Ah! The second last line (for the backup subdirectory) has an owner of `root:root` (that's the host's root user, btw).
 No good. It must be a user on the host with userid:groupid of 999:999.
 
 The solution would then be to create a suitable user on the host computer and then change the owner of the `./backup` directory.
 
 ## Solution
 
-It should be noted that the problem described in this text can be solved in several ways. The container could be made to use another user (that already exists on the host computer), the container could be forced to run as root etc.  
+It should be noted that the problem described in this text can be solved in several ways. The container could be made to use another user (that already exists on the host computer), the container could be forced to run as root etc.
 What's described below worked in one case, but your milage may vary.
 
 ### Create unifi user on host computer
@@ -206,14 +206,14 @@ Great, the `./backup` directory now has the permissions needed in order for the 
 
 ### Testing the solution
 
-Restart the container, then try downloading the backup file again.  
+Restart the container, then try downloading the backup file again.
 Should work - at least if your original issues was the same that lead up to this walk-through...
 
 ## Automatic backups
 
 Good news: The work above also fixes automatic backups.
 
-The automatic backups rely on files in the same backup directory structure within the container as the manual backups.  
+The automatic backups rely on files in the same backup directory structure within the container as the manual backups.
 
-Give it a try: Set a time for automatic backups and check back once that time has passed. There should now be a downloadable backup file in the web UI.  
+Give it a try: Set a time for automatic backups and check back once that time has passed. There should now be a downloadable backup file in the web UI.
 Examples of such files are shown in the screen shot above.

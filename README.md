@@ -57,7 +57,7 @@ docker run -d --init \
    -v ~/unifi:/unifi \
    --user unifi \
    --name unifi \
-   nexusforge/unifi-docker
+   paulwib/unifi-docker
 ```
 
 In a minute or two, (after Unifi Controller starts up) you can go to
@@ -72,7 +72,7 @@ If you are _certain_ that you have typed the address of the
 Docker host correctly, agree to the connection.
 * See the note below about **Override "Inform Host" IP** so your
 Unifi devices can "find" the Unifi Controller.
- 
+
 ### Stopping Unifi-in-Docker
 
 To change options, stop the Docker container then re-run the `docker run...` command
@@ -107,9 +107,9 @@ The options for the `docker run...` command are:
 restart it unless you issue a `docker stop ...`
 - `-p ...` - Set the ports to pass through to the container.
 `-p 8080:8080 -p 8443:8443 -p 3478:3478/udp`
-is the minimal set for a working Unifi Controller. 
+is the minimal set for a working Unifi Controller.
 - `-e TZ=...` Set an environment variable named `TZ` with the desired time zone.
-Find your time zone in this 
+Find your time zone in this
 [list of timezones.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 - `-e ...` See the [Environment Variables](#environment-variables)
 section for more environment variables.
@@ -119,8 +119,8 @@ to the directory `/unifi`inside the container.
 If you created the directory elsewhere, modify the `~/unifi` part of this option to match.
 See the [Volumes](#volumes) discussion for other volumes used by Unifi Controller.
 - `--user unifi` - Run as a non-root user. See the [Run as non-root User](#run-as-non-root-user) discussion below
-- `nexusforge/unifi-docker` - the name of the container to use.
-The `nexusforge/unifi-docker` image is retrieved from [Dockerhub.](https://hub.docker.com/r/nexusforge/unifi-docker)
+- `paulwib/unifi-docker` - the name of the container to use.
+The `paulwib/unifi-docker` image is retrieved from [Dockerhub.](https://hub.docker.com/r/paulwib/unifi-docker)
 The [Current Information](#current-information) section below discusses the versions/tags that are available.
 
 ## Current Information
@@ -132,21 +132,21 @@ affecting Unifi Controller.**
 You can choose the version of Unifi Controller in the `docker run ...` command.
 In Docker terminology, these versions are specified by "tags".
 
-For example, in this project the container named `nexusforge/unifi-docker`
+For example, in this project the container named `paulwib/unifi-docker`
 (with no "tag")
 provides the most recent stable release.
 The table below lists recent versions.
 
-You may also specify a version number (e.g., `nexusforge/unifi-docker:v8`)
+You may also specify a version number (e.g., `paulwib/unifi-docker:v8`)
 to get a specific version number, as shown in the table below.
 
-_Note:_ In Docker, specifying an image with no tag 
-(e.g., `nexusforge/unifi-docker`) gets the "latest" tag.
+_Note:_ In Docker, specifying an image with no tag
+(e.g., `paulwib/unifi-docker`) gets the "latest" tag.
 For Unifi-in-Docker, this uses the most recent stable version.
 
 | Tag | Description | Changelog |
 |-----|-------------|-----------|
-| [`latest` `v8.2.93`](https://github.com/nexusforge/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 8.2.93 as of 2024-06-03 |[Change Log 8.2.93](https://community.ui.com/releases/UniFi-Network-Application-8-2-93/fce86dc6-897a-4944-9c53-1eec7e37e738)|
+| [`latest` `v8.2.93`](https://github.com/paulwib/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 8.2.93 as of 2024-06-03 |[Change Log 8.2.93](https://community.ui.com/releases/UniFi-Network-Application-8-2-93/fce86dc6-897a-4944-9c53-1eec7e37e738)|
 
 ### multiarch
 
@@ -168,11 +168,11 @@ To do this:
 
 * Find **Settings -> System -> Other Configuration -> Override Inform Host:** in the Unifi Controller web GUI.
 (It's near the bottom of that page.)
-* Check the "Enable" box, and enter the IP address of the Docker host machine. 
+* Check the "Enable" box, and enter the IP address of the Docker host machine.
 * Save settings in Unifi Controller
 * Restart UniFi-in-Docker container with `docker stop ...` and `docker run ...` commands.
 
-See [Side Projects](https://github.com/nexusforge/unifi-docker/blob/master/Side-Projects.md#other-techniques-for-adoption) for
+See [Side Projects](https://github.com/paulwib/unifi-docker/blob/master/Side-Projects.md#other-techniques-for-adoption) for
 other techniques to get Unifi devices to adopt your
 new Unifi Controller.
 
@@ -181,18 +181,18 @@ new Unifi Controller.
 Unifi looks for the `/unifi` directory (within the container)
 for its special purpose subdirectories:
 
-* `/unifi/data` This contains your UniFi configuration data. (formerly: `/var/lib/unifi`) 
+* `/unifi/data` This contains your UniFi configuration data. (formerly: `/var/lib/unifi`)
 
 * `/unifi/log` This contains UniFi log files (formerly: `/var/log/unifi`)
 
-* `/unifi/cert` Place custom SSL certs in this directory. 
+* `/unifi/cert` Place custom SSL certs in this directory.
 For more information regarding the naming of the certificates,
 see [Certificate Support](#certificate-support). (formerly: `/var/cert/unifi`)
 
 * `/unifi/init.d`
 You can place scripts you want to launch every time the container starts in here
 
-* `/var/run/unifi` 
+* `/var/run/unifi`
 Run information, in general you will not need to touch this volume.
 It is there to ensure UniFi has a place to write its PID files
 
@@ -216,19 +216,19 @@ This is the HTTP port used by the Web interface. Browsers will be redirected to 
 
 * `UNIFI_HTTPS_PORT`
 This is the HTTPS port used by the Web interface.
-**Default: 8443** 
+**Default: 8443**
 
 * `PORTAL_HTTP_PORT`
 Port used for HTTP portal redirection.
-**Default: 80** 
+**Default: 80**
 
 * `PORTAL_HTTPS_PORT`
 Port used for HTTPS portal redirection.
-**Default: 8843** 
+**Default: 8843**
 
 * `UNIFI_STDOUT`
 Controller outputs logs to stdout in addition to server.log
-**Default: unset** 
+**Default: unset**
 
 * `TZ`
 TimeZone. (i.e America/Chicago)
@@ -246,7 +246,7 @@ Example:
 * `LOTSOFDEVICES`
 Enable this with `true` if you run a system with a lot of devices
 and/or with a low powered system (like a Raspberry Pi).
-This makes a few adjustments to try and improve performance: 
+This makes a few adjustments to try and improve performance:
 
    * enable unifi.G1GC.enabled
    * set unifi.xms to JVM\_INIT\_HEAP\_SIZE
@@ -256,20 +256,20 @@ This makes a few adjustments to try and improve performance:
 
    See [the Unifi support site](https://help.ui.com/hc/en-us/articles/115005159588-UniFi-How-to-Tune-the-Network-Application-for-High-Number-of-UniFi-Devices)
 for an explanation of some of those options.
-**Default: unset** 
+**Default: unset**
 
 * `JVM_EXTRA_OPTS`
 Used to start the JVM with additional arguments.
-**Default: unset** 
+**Default: unset**
 
 * `JVM_INIT_HEAP_SIZE`
 Set the starting size of the javascript engine for example: `1024M`
-**Default: unset** 
+**Default: unset**
 
 * `JVM_MAX_HEAP_SIZE`
-Java Virtual Machine (JVM) allocates available memory. 
-For larger installations a larger value is recommended. For memory constrained system this value can be lowered. 
-**Default: 1024M** 
+Java Virtual Machine (JVM) allocates available memory.
+For larger installations a larger value is recommended. For memory constrained system this value can be lowered.
+**Default: 1024M**
 
 ## Exposed Ports
 
@@ -277,9 +277,9 @@ The Unifi-in-Docker container exposes the following ports.
 A minimal Unifi Controller installation requires you
 expose the first three with the `-p ...` option.
 
-* 8080/tcp - Device command/control 
-* 8443/tcp - Web interface + API 
-* 3478/udp - STUN service 
+* 8080/tcp - Device command/control
+* 8443/tcp - Web interface + API
+* 3478/udp - STUN service
 * 8843/tcp - HTTPS portal _(optional)_
 * 8880/tcp - HTTP portal _(optional)_
 * 6789/tcp - Speed Test (unifi5 only) _(optional)_
@@ -298,7 +298,7 @@ owned by the proper gid.
 _Note:_ When you run as a non-root user,
 you will not be able to bind to lower ports by default.
 (This would not necessary if you are using the default ports.)
-If you must do this, also pass the 
+If you must do this, also pass the
 `--sysctl net.ipv4.ip_unprivileged_port_start=0`
 option on the `docker run...` to bind to whatever port you wish.
 
@@ -339,9 +339,9 @@ If the output contains `id-ec` as shown in the example, then your certificate mi
 ## Additional Information
 
 This document describes everything you need to get Unifi-in-Docker running.
-The [Side Projects and Background Info](https://github.com/nexusforge/unifi-docker/blob/master/Side-Projects.md) page
+The [Side Projects and Background Info](https://github.com/paulwib/unifi-docker/blob/master/Side-Projects.md) page
 provides more about what we've learned while developing Unifi-in-Docker.
 
 ## TODO
 
-This list is empty for now, please [add your suggestions](https://github.com/nexusforge/unifi-docker/issues).
+This list is empty for now, please [add your suggestions](https://github.com/paulwib/unifi-docker/issues).

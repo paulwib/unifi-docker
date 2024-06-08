@@ -2,7 +2,7 @@ language: bash
 dist: bionic
 env:
  global:
-  - DOCKER_REPO=nexusforge/unifi-docker
+  - DOCKER_REPO=paulwib/unifi-docker
 services:
  - docker
 before_install:
