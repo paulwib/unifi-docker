@@ -1,4 +1,4 @@
-FROM golang:1.21-bullseye as permset
+FROM golang:1.22-bullseye as permset
 WORKDIR /src
 RUN git clone https://github.com/nexusforge/permset.git /src && \
     mkdir -p /out && \
@@ -10,7 +10,7 @@ LABEL maintainer="https://github.com/nexusforge"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/8.2.93/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/8.3.32/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \
