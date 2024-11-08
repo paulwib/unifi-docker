@@ -1,4 +1,4 @@
-FROM golang:1.23-bookworm as permset
+FROM golang:1.22-bullseye as permset
 WORKDIR /src
 RUN git clone https://github.com/nexusforge/permset.git /src && \
     mkdir -p /out && \
