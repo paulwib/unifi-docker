@@ -125,7 +125,7 @@ The [Current Information](#current-information) section below discusses the vers
 
 ## Current Information
 
-**The current "latest" version is Unifi Controller 9.1.119.
+**The current "latest" version is Unifi Controller 9.1.120.
 There are currently no hot-fix or CVE warnings
 affecting Unifi Controller.**
 
@@ -146,7 +146,7 @@ For Unifi-in-Docker, this uses the most recent stable version.
 
 | Tag | Description | Changelog |
 |-----|-------------|-----------|
-| [`latest` `v9.1.119`](https://github.com/nexusforge/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 9.1.119 as of 2025-04-24 |[Change Log 9.1.119](https://community.ui.com/releases/UniFi-Network-Application-9-1-119/ae21f6e9-b18a-4705-81c0-cfff86a25bcb)|
+| [`latest` `v9.1.120`](https://github.com/nexusforge/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 9.1.120 as of 2025-04-25 |[Change Log 9.1.120](https://community.ui.com/releases/UniFi-Network-Application-9-1-120/a5e88ae2-3c44-420a-bebb-5120bf2288b2)|
 
 ### multiarch
 
