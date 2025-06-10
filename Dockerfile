@@ -1,4 +1,4 @@
-FROM golang:1.23-bookworm as permset
+FROM golang:1.24-bookworm as permset
 WORKDIR /src
 RUN git clone https://github.com/nexusforge/permset.git /src && \
     mkdir -p /out && \
@@ -10,7 +10,7 @@ LABEL maintainer="https://github.com/nexusforge"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/9.1.120/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/9.2.87/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \
