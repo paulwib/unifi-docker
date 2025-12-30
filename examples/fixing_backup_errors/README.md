@@ -49,8 +49,8 @@ services:
       - db:/data/db
       - dbcfg:/data/configdb
   controller:
-    # image: "nexusforge/unifi-docker:${TAG:-latest}"
-    image: nexusforge/unifi-docker:latest
+    # image: "paulwib/unifi-docker:${TAG:-latest}"
+    image: paulwib/unifi-docker:latest
     # container_name: ${COMPOSE_PROJECT_NAME}_controller
     container_name: unifi_controller
     depends_on:

@@ -6,7 +6,7 @@ RUN git clone https://github.com/nexusforge/permset.git /src && \
 
 FROM ubuntu:20.04
 
-LABEL maintainer="https://github.com/nexusforge"
+LABEL maintainer="https://github.com/paulwib"
 
 ARG DEBIAN_FRONTEND=noninteractive
 

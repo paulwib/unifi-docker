@@ -1,6 +1,6 @@
 services:
   controller:
-    image: nexusforge/unifi-docker:$TAG_NAME
+    image: paulwib/unifi-docker:$TAG_NAME
     container_name: unifi
     networks:
       - unifi

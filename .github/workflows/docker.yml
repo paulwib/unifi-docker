@@ -5,7 +5,7 @@ on:
       - 'v*.*.*'
 
 env:
-  TEST_TAG: nexusforge/unifi-docker:test
+  TEST_TAG: paulwib/unifi-docker:test
   PKGURL: https://dl.ui.com/unifi/6.5.55/unifi_sysvinit_all.deb
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
             type=semver,pattern=v{{major}}.{{minor}}
             type=ref,event=branch
           images: |
-            nexusforge/unifi-docker
+            paulwib/unifi-docker
             ghcr.io/${{ github.repository }}
       - name: Build container image
         uses: docker/build-push-action@v4

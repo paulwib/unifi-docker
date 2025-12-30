@@ -57,7 +57,7 @@ docker run -d --init \
    -v ~/unifi:/unifi \
    --user unifi \
    --name unifi \
-   nexusforge/unifi-docker
+   paulwib/unifi-docker
 ```
 
 In a minute or two, (after Unifi Controller starts up) you can go to
@@ -119,8 +119,8 @@ to the directory `/unifi`inside the container.
 If you created the directory elsewhere, modify the `~/unifi` part of this option to match.
 See the [Volumes](#volumes) discussion for other volumes used by Unifi Controller.
 - `--user unifi` - Run as a non-root user. See the [Run as non-root User](#run-as-non-root-user) discussion below
-- `nexusforge/unifi-docker` - the name of the container to use.
-The `nexusforge/unifi-docker` image is retrieved from [Dockerhub.](https://hub.docker.com/r/nexusforge/unifi-docker)
+- `paulwib/unifi-docker` - the name of the container to use.
+The `paulwib/unifi-docker` image is retrieved from [Dockerhub.](https://hub.docker.com/r/paulwib/unifi-docker)
 The [Current Information](#current-information) section below discusses the versions/tags that are available.
 
 ## Current Information
@@ -132,21 +132,21 @@ affecting Unifi Controller.**
 You can choose the version of Unifi Controller in the `docker run ...` command.
 In Docker terminology, these versions are specified by "tags".
 
-For example, in this project the container named `nexusforge/unifi-docker`
+For example, in this project the container named `paulwib/unifi-docker`
 (with no "tag")
 provides the most recent stable release.
 The table below lists recent versions.
 
-You may also specify a version number (e.g., `nexusforge/unifi-docker:v8`)
+You may also specify a version number (e.g., `paulwib/unifi-docker:v8`)
 to get a specific version number, as shown in the table below.
 
-_Note:_ In Docker, specifying an image with no tag 
-(e.g., `nexusforge/unifi-docker`) gets the "latest" tag.
+_Note:_ In Docker, specifying an image with no tag
+(e.g., `paulwib/unifi-docker`) gets the "latest" tag.
 For Unifi-in-Docker, this uses the most recent stable version.
 
 | Tag | Description | Changelog |
 |-----|-------------|-----------|
-| [`latest` `v10.0.162`](https://github.com/nexusforge/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 10.0.162 as of 2025-12-10 |[Change Log 10.0.162](https://community.ui.com/releases/UniFi-Network-Application-10-0-162/2efd581a-3a55-4c36-80bf-1267dbfc2aee)|
+| [`latest` `v10.0.162`](https://github.com/paulwib/unifi-docker/blob/master/Dockerfile) | Current Stable: Version 10.0.162 as of 2025-12-10 |[Change Log 10.0.162](https://community.ui.com/releases/UniFi-Network-Application-10-0-162/2efd581a-3a55-4c36-80bf-1267dbfc2aee)|
 
 ### multiarch
 
@@ -172,7 +172,7 @@ To do this:
 * Save settings in Unifi Controller
 * Restart UniFi-in-Docker container with `docker stop ...` and `docker run ...` commands.
 
-See [Side Projects](https://github.com/nexusforge/unifi-docker/blob/master/Side-Projects.md#other-techniques-for-adoption) for
+See [Side Projects](https://github.com/paulwib/unifi-docker/blob/master/Side-Projects.md#other-techniques-for-adoption) for
 other techniques to get Unifi devices to adopt your
 new Unifi Controller.
 
@@ -339,7 +339,7 @@ If the output contains `id-ec` as shown in the example, then your certificate mi
 ## Additional Information
 
 This document describes everything you need to get Unifi-in-Docker running.
-The [Side Projects and Background Info](https://github.com/nexusforge/unifi-docker/blob/master/Side-Projects.md) page
+The [Side Projects and Background Info](https://github.com/paulwib/unifi-docker/blob/master/Side-Projects.md) page
 provides more about what we've learned while developing Unifi-in-Docker.
 
 ## TODO
